@@ -22,7 +22,7 @@
 function init() {
     //Read the Json File 
     d3.json("samples.json").then(function(data) {
-        
+
     var names = data.names;
     
     var otu_ids = data.samples[0].otu_ids
@@ -54,14 +54,21 @@ function buildMetadata() {
     d3.json("samples.json").then((data) => {
         var metadata_data = data.metadata[0];
         // Filter the data for the object with the desired sample number
-        var metadata_id = metadata_data
+        var metadata_id = metadata_data;
         var result = metadata_id[0];
         // Use d3 to select the panel with id of `#sample-metadata`
-        var PANEL = d3.select("#sample-metadata").append(result);
-        console.log(metadata_id);
+        var PANEL = d3.select("#sample-metadata")
+        
+        Object.entries(metadata_data).forEach((demotable) => {
+                PANEL
+                .append("option")
+                .text(demotable)
+                .property("value", demotable); 
+        })
+        console.log(data.metadata);
       
           // Use `.html("") to clear any existing metadata
-          PANEL.html("");
+          //PANEL.html("");
       
         
         });
