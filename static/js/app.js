@@ -77,7 +77,7 @@ buildMetadata();
 
 //Create the Trace for the bar chart
 function barchart() {
-    d3.json("StarterCode/samples.json").then(function(data) {        
+    d3.json("data/samples.json").then(function(data) {        
     var otu_ids = data.samples[0].otu_ids
         
     var sample_values = data.samples[0].sample_values
@@ -113,7 +113,7 @@ barchart();
 //--------------------------------------------------------
 //Create the Trace for the bubble chart
 function bubblechart() {
-    d3.json("StarterCode/samples.json").then(function(data) {
+    d3.json("data/samples.json").then(function(data) {
         
         var otu_ids = data.samples[0].otu_ids
         
