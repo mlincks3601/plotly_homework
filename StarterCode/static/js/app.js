@@ -44,7 +44,11 @@ init();
     // Build the Demographics Panel 
 function buildMetadata() {
     d3.json("samples.json").then((data) => {
-        var metadata_data = data.metadata.filter(id);
+
+        var dataset_id = d3.select("#selDataset").node().value
+
+       var metadata_data = data.metadata.filter(d => d.id === parseInt(dataset_id));
+        console.log(metadata_data);
         // Filter the data for the object with the desired sample number
         var metadata_id = metadata_data;
         var result = metadata_id[0];
@@ -52,7 +56,7 @@ function buildMetadata() {
         var PANEL = d3.select("#sample-metadata")
         
 
-        Object.entries(metadata_data).forEach((demotable) => {
+        Object.entries(result).forEach((demotable) => {
                 PANEL
                 .append("option")
                 .text(demotable)
