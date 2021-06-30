@@ -24,14 +24,6 @@ function init() {
     d3.json("samples.json").then(function(data) {
 
     var names = data.names;
-    
-    var otu_ids = data.samples[0].otu_ids
-    
-    var sample_values = data.samples[0].sample_values
-    
-    var wash_freq = data.metadata[0].wfreq
-    
-    var otu_labels = data.samples[0].otu_labels
 
     var dataset_id = d3.select("#selDataset")
 
@@ -59,6 +51,7 @@ function buildMetadata() {
         // Use d3 to select the panel with id of `#sample-metadata`
         var PANEL = d3.select("#sample-metadata")
         
+
         Object.entries(metadata_data).forEach((demotable) => {
                 PANEL
                 .append("option")
@@ -117,23 +110,19 @@ barchart();
 //Create the Trace for the bubble chart
 function bubblechart() {
     d3.json("samples.json").then(function(data) {
-        var names = data.names;
         
         var otu_ids = data.samples[0].otu_ids
         
         var sample_values = data.samples[0].sample_values
-        
-        var wash_freq = data.metadata[0].wfreq
-        
+                
         var otu_labels = data.samples[0].otu_labels
-        var dataset_id = d3.select("#selDataset")
     var trace2 = {
         x: otu_ids,
         y: sample_values,
-        //type: "bubble",
+        type: "bubble",
         text: otu_labels,
         hoverinfo: "x+y+text",
-        mode: 'markers',
+        mode: 'OTU Id',
         marker: {
             color: otu_ids,
         size: [sample_values]
@@ -143,7 +132,8 @@ function bubblechart() {
     var data = [trace2];
   
     var layout = {
-        title: 'Marker Size',
+        title: 'Bacteria Cultures Per Sample',
+        xaxis: { title: "OTU IDs" },
      showlegend: false,
         height: 600,
         width: 600
@@ -159,24 +149,27 @@ bubblechart();
 //Create the gauge chart
 function gaugechart() {
     d3.json("samples.json").then(function(data) {
+
         var wash_freq = data.metadata[0].wfreq
-        
-        var otu_labels = data.samples[0].otu_labels
-        var dataset_id = d3.select("#selDataset")
+
         var trace3 = [
-	{   gauge: {
-            axis: {range: [0,10], dtick: 2},
-        bar: {color: "black"},
-		value: wash_freq,
-		title: { text: "Speed" },
-		type: "indicator",
-		mode: "gauge+number"
+	        {   
+            domain: {x: [0,1], y:[0,1] },
+            bar: {color: "black"},
+		    value: wash_freq,
+		    title: { text: "Belly button wash frequency" },
+		    type: "indicator",
+		    mode: "gauge+number",
+            gauge: {
+                axis: {range: [null, 9]},
 	}}]
 
 
     var data = [trace3];
 
-    var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    var layout = { width: 700, height: 600, margin: 
+        { t: 20, b: 40, l:100, r:100 } };
+
     Plotly.newPlot('gauge', data, layout);
 })};
 gaugechart();
