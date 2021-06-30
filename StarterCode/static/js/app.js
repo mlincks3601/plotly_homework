@@ -21,7 +21,7 @@
 // get the user input field
 function init() {
     //Read the Json File 
-    d3.json("samples.json").then(function(data) {
+    d3.json("data/samples.json").then(function(data) {
 
     var names = data.names;
 
@@ -43,7 +43,7 @@ init();
     
     // Build the Demographics Panel 
 function buildMetadata() {
-    d3.json("samples.json").then((data) => {
+    d3.json("data/samples.json").then((data) => {
 
         var dataset_id = d3.select("#selDataset").node().value
 
@@ -77,7 +77,7 @@ buildMetadata();
 
 //Create the Trace for the bar chart
 function barchart() {
-    d3.json("samples.json").then(function(data) {        
+    d3.json("data/samples.json").then(function(data) {        
     var otu_ids = data.samples[0].otu_ids
         
     var sample_values = data.samples[0].sample_values
@@ -113,7 +113,7 @@ barchart();
 //--------------------------------------------------------
 //Create the Trace for the bubble chart
 function bubblechart() {
-    d3.json("samples.json").then(function(data) {
+    d3.json("data/samples.json").then(function(data) {
         
         var otu_ids = data.samples[0].otu_ids
         
@@ -155,7 +155,7 @@ bubblechart();
 //----------------------------------------------------------------
 //Create the gauge chart
 function gaugechart() {
-    d3.json("samples.json").then(function(data) {
+    d3.json("data/samples.json").then(function(data) {
 
         var wash_freq = data.metadata[0].wfreq
 
