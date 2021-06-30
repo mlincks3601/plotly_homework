@@ -44,7 +44,7 @@ init();
     // Build the Demographics Panel 
 function buildMetadata() {
     d3.json("samples.json").then((data) => {
-        var metadata_data = data.metadata[0];
+        var metadata_data = data.metadata.filter(id);
         // Filter the data for the object with the desired sample number
         var metadata_id = metadata_data;
         var result = metadata_id[0];
@@ -116,6 +116,7 @@ function bubblechart() {
         var sample_values = data.samples[0].sample_values
                 
         var otu_labels = data.samples[0].otu_labels
+        var dataset_id = d3.select("#selDataset")
     var trace2 = {
         x: otu_ids,
         y: sample_values,
@@ -134,6 +135,8 @@ function bubblechart() {
     var layout = {
         title: 'Bacteria Cultures Per Sample',
         xaxis: { title: "OTU IDs" },
+        yaxis: { title: "Amount of Samples Collected" },
+
      showlegend: false,
         height: 600,
         width: 600
